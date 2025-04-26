@@ -30,6 +30,19 @@
 
 .ai-summary-content p {
   line-height: 1.5;
+  white-space: pre-wrap;
+}
+/**
+ * Blinking cursor effect during streaming summary.
+ */
+@keyframes blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+.typing-cursor::after {
+  content: '|';
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
 }
 
 .ai-sources {

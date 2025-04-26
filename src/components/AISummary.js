@@ -25,6 +25,8 @@ const AISummary = ({ loading }) => {
     <div className="ai-summary">
       <div className="ai-summary-header">
         <h2>AI Summary</h2>
+        {/* Spinner in header during streaming */}
+        {loading && <LoadingSpinner />}
         <div className="ai-summary-controls">
           <button onClick={toggleFormat}>
             {format === 'brief' ? 'Switch to Detailed' : 'Switch to Brief'}
@@ -33,11 +35,11 @@ const AISummary = ({ loading }) => {
           <button onClick={toggleSummaryPanel}>Collapse</button>
         </div>
       </div>
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        <div className="ai-summary-content">
-          <p>{summary}</p>
+      <div className="ai-summary-content">
+        {/* Show streaming summary with basic typewriter effect */}
+        <p className={loading ? 'typing-cursor' : ''}>{summary}</p>
+        {/* Sources list appears after streaming completes */}
+        {!loading && (
           <div className="ai-sources">
             <h4>Sources</h4>
             <ul>
@@ -50,8 +52,8 @@ const AISummary = ({ loading }) => {
               ))}
             </ul>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

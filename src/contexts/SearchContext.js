@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { searchWiki } from '../api/wiki';
-import { generateSummary } from '../api/openai';
+import { generateSummary, streamSummary } from '../api/openai';
 
 const SearchContext = createContext();
 export const useSearch = () => useContext(SearchContext);
@@ -54,9 +54,13 @@ export const SearchProvider = ({ children }) => {
       );
       setLoadingResults(false);
 
+      // Stream AI summary with typewriter effect
       setLoadingSummary(true);
-      const summaryText = await generateSummary(newQuery, wikiResults, format);
-      setSummary(summaryText);
+      setSummary('');
+      // streamSummary will call setSummary incrementally
+      await streamSummary(newQuery, wikiResults, format, (chunk) => {
+        setSummary(prev => prev + chunk);
+      });
       setLoadingSummary(false);
     } catch (err) {
       setError(err.message || 'An error occurred during search.');

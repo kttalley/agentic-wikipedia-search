@@ -30,6 +30,16 @@
   overflow: hidden;
 }
 
+/* Sticky summary panel styling */
+.sticky-summary {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  /* Ensure background covers underlying content */
+  background-color: inherit;
+  z-index: 1;
+}
+
 .column {
   flex: 1;
   overflow-y: auto;

@@ -17,7 +17,10 @@ const SearchPage = () => {
           {loadingResults ? <p>Loading results...</p> : <SearchResults />}
         </div>
         <div className="column">
-          <AISummary loading={loadingSummary} />
+          {/* Sticky container to keep AI panel at top */}
+          <div className="sticky-summary">
+            <AISummary loading={loadingSummary} />
+          </div>
         </div>
       </div>
     </div>
