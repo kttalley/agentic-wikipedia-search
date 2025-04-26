@@ -1,0 +1,21 @@
+.search-results {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-results li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.search-results li h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.search-results li p {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #555;
+}

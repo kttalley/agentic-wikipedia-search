@@ -1,0 +1,56 @@
+.ai-summary {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ai-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+
+.ai-summary-controls button {
+  margin-left: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.9rem;
+  border: none;
+  background-color: #0066cc;
+  color: white;
+  border-radius: 4px;
+}
+
+.ai-summary-content {
+  padding-top: 1rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.ai-summary-content p {
+  line-height: 1.5;
+}
+
+.ai-sources {
+  margin-top: 1rem;
+}
+
+.ai-sources ul {
+  list-style: none;
+  padding: 0;
+}
+
+.ai-sources li {
+  margin: 0.25rem 0;
+}
+
+.expand-button {
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  background-color: #0066cc;
+  color: white;
+  border-radius: 4px;
+}
