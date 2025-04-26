@@ -21,3 +21,40 @@ export const searchWiki = async (query) => {
     snippet: item.snippet,
   }));
 };
+/**
+ * Fetch the HTML content of a Wikipedia page.
+ * @param {string} title - The title of the Wikipedia page.
+ * @returns {Promise<string>} HTML content of the page.
+ */
+export const fetchPageHtml = async (title) => {
+  const response = await axios.get('https://en.wikipedia.org/w/api.php', {
+    params: {
+      action: 'parse',
+      page: title,
+      format: 'json',
+      origin: '*',
+      prop: 'text',
+    },
+  });
+  return response.data.parse.text['*'];
+};
+/**
+ * Fetch the plain text extract of a Wikipedia page.
+ * @param {string} title - The title of the Wikipedia page.
+ * @returns {Promise<string>} Plain text of the page.
+ */
+export const fetchPageText = async (title) => {
+  const response = await axios.get('https://en.wikipedia.org/w/api.php', {
+    params: {
+      action: 'query',
+      prop: 'extracts',
+      explaintext: true,
+      titles: title,
+      format: 'json',
+      origin: '*',
+    },
+  });
+  const pages = response.data.query.pages;
+  const page = pages[Object.keys(pages)[0]];
+  return page.extract;
+};

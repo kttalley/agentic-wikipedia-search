@@ -85,3 +85,36 @@ export const generateSummary = async (query, wikiResults, format) => {
   });
   return text.trim();
 };
+/**
+ * Generate a chat reply from the AI agent, personifying the Wikipedia article.
+ * @param {string} articleTitle - Title of the Wikipedia page.
+ * @param {string} articleText - Plain text extract of the Wikipedia page.
+ * @param {Array} conversation - Array of message objects { role, content }.
+ * @returns {Promise<string>} AI-generated reply.
+ */
+export const generateChatReply = async (articleTitle, articleText, conversation) => {
+  const systemPrompt = `You are the Wikipedia article "${articleTitle}". Answer the user's questions using the article content as if you were the document personified. Here is the article content:\n\n${articleText}`;
+  const messages = [
+    { role: 'system', content: systemPrompt },
+    ...conversation,
+  ];
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: 'gpt-3.5-turbo',
+      messages,
+      temperature: 0.7,
+      max_tokens: 500,
+    }),
+  });
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`OpenAI API error: ${err}`);
+  }
+  const data = await response.json();
+  return data.choices?.[0]?.message?.content.trim() || '';
+};

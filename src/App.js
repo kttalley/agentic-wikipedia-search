@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import SearchPage from './pages/SearchPage';
 import HistoryPage from './pages/HistoryPage';
+import WikiPage from './pages/WikiPage';
 import './styles/App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SearchPage />} />
           <Route path="/history" element={<HistoryPage />} />
+          <Route path="/page/:title" element={<WikiPage />} />
         </Routes>
       </div>
     </Router>
